@@ -215,8 +215,8 @@ policy_linear <- function(X,Y,nb_Y,alpha){
 
 #Quadratic utility policy
 policy_quad <- function(X,Y,nb_Y,alpha){
-  alpha_pri <- alpha[1:3]
-  alpha0 <- alpha[4]
+  alpha_pri <- alpha[1:(ncol(X)+2)]
+  alpha01 <- alpha[ncol(X)+3]
   pri <- expit(cbind(X,Y,nb_Y)%*%alpha_pri)
   pri[which(pri<0.0001)] <- 0.0001
   Q1 <- diag(as.vector(pri))
