@@ -260,7 +260,7 @@ get.value.base.pos <- function(alpha, params, X_env, Y_base, nyear, nsamps,polic
 }
 
 # Estimate the loss value based on true model
-get.value.base <- function(alpha, params, X_env, Y_base, latent_base,nyear, nsamps,policy){
+get.value.true <- function(alpha, params, X_env, Y_base, latent_base,nyear, nsamps,policy){
   Ypred <- array(0,c(nsamps,ns,nyear))
   X_env_std <- (X_env-mean(X_env))/sd(X_env)
   for(i in 1:nsamps){
@@ -282,40 +282,4 @@ get.value.base <- function(alpha, params, X_env, Y_base, latent_base,nyear, nsam
   return(mean(expit(Ypred)))
 }
 
-# Get the true loss value associated with the policy with 
-# linear utility function and weight alpha in the priority score
-get.value.linear <- function(alpha,params,nsamps=100,policy=policy_linear){
-  value <- get.value.base(alpha, params, X_env, Y_ms[,nt],Y[,nt], nyear=5, nsamps=nsamps,policy=policy)
-  return(value)
-}
 
-# Get the true loss value associated with the policy with 
-# quadratic utility function and weight alpha in the priority score
-get.value.quad <- function(alpha,params,nsamps=100,policy=policy_quad){
-  value <- get.value.base(alpha,params,X_env, Y_ms[,nt],Y[,nt], nyear=5, nsamps=nsamps,policy=policy)
-  return(value)
-}
-
-# Get the true loss value associated with the highest rate policy
-get.value.highY <- function(alpha,params,nsamps=100,policy=policy_highY){
-  value <- get.value.base(alpha,params,X_env,Y_ms[,nt], Y[,nt], nyear=5, nsamps=nsamps,policy=policy)
-  return(value)
-}
-
-# Get the true loss value associated with the even policy
-get.value.even <- function(alpha,params,nsamps=100,policy=policy_even){
-  value <- get.value.base(alpha,params,X_env, Y_ms[,nt],Y[,nt], nyear=5, nsamps=nsamps,policy=policy)
-  return(value)
-}
-
-# Get the true loss value associated with policy with resource allocated to everyone
-get.value.no <- function(alpha,params,nsamps=100,policy=policy_no){
-  value <- get.value.base(alpha,params,X_env, Y_ms[,nt],Y[,nt], nyear=5, nsamps=nsamps,policy=policy)
-  return(value)
-}
-
-# Get the true loss value associated with policy with no resource allocation
-get.value.all <- function(alpha,params,nsamps=100,policy=policy_all){
-  value <- get.value.base(alpha,params,X_env, Y_ms[,nt],Y[,nt], nyear=5, nsamps=nsamps,policy=policy)
-  return(value)
-}
