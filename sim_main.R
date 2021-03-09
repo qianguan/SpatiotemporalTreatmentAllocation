@@ -143,12 +143,17 @@ res <- noisy.optimizer(optim.crit="EQI", optim.param=list(quantile=0.5),
 # Estimated optimal weights
 alpha_opt <- res$best.x
 # The loss value assciated with the linear utility policy
-val_linear <- get.value.linear(res$best.x,params_or,nsamps=1000)
+val_linear <- get.value.true(res$best.x, params_or, X_env, Y_ms[,nt],Y[,nt], 
+                             nyear=5, nsamps=1000,policy=policy_linear)
 # # The loss value assciated with the highest rate policy
-val_highY <- get.value.highY(res$best.x,params_or,nsamps=1000)
+val_highY <- get.value.true(res$best.x, params_or, X_env, Y_ms[,nt],Y[,nt], 
+                             nyear=5, nsamps=1000,policy=policy_highY)
 # The loss value assciated with the even policy
-val_even <- get.value.even(res$best.x,params_or,nsamps=1000)
+val_even <- get.value.true(res$best.x, params_or, X_env, Y_ms[,nt],Y[,nt], 
+                           nyear=5, nsamps=1000,policy=policy_even)
 # The loss value assciated with the policy with no resource allocation
-val_no <- get.value.no(res$best.x,params_or,nsamps=1000)
+val_no <- get.value.true(res$best.x, params_or, X_env, Y_ms[,nt],Y[,nt], 
+                         nyear=5, nsamps=1000,policy=policy_no)
 # The loss value assciated with the policy with resource allocated to everyone
-val_all <- get.value.all(res$best.x,params_or,nsamps=1000)
+val_all <- get.value.true(res$best.x, params_or, X_env, Y_ms[,nt],Y[,nt], 
+                          nyear=5, nsamps=1000,policy=policy_all)
